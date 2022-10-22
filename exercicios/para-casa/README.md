@@ -1,11 +1,54 @@
 # Exercício de Casa 🏠 
 
-## Nome do Exercicio
+## Projeto Guiado 2
 
-- Explicação do exercício: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leo nibh, tempus sed rhoncus et, ultrices vitae orci.
-Donec erat mauris, laoreet in tortor vel, eleifend suscipit nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Aliquam leo nibh, tempus sed rhoncus et, ultrices vitae orci. Donec erat mauris, laoreet in tortor vel, eleifend suscipit nibh. 
----
+### Exercicio - Cade o meu boletin?
+
+Para finarlizamos o nosso projeto guiado, ficou faltando um endpoint que retorne o boletin de todos os alunos.
+
+#### Regras de negocio
+
+Será necessario filtrar as alunas pela turma que foi recebida via parametros
+Será necessário obter a média de todas as disciplinas e a partir dessa média definir a situacao da aluna
+
+nota maior que 6 - "APROVADA"
+nota maior que 5 e menor que 6 - "RECUPERACAO"
+nota menor que 5 - "REPROVADA"
+
+Detalhes do endpoint:
+GET /alunas/
+
+resposta esperada:
+
+```json
+  [
+{
+    "ciencias_da_natureza": 10,
+    "ciencias_humanas": 10,
+    "linguagens_codigos": 10,
+    "matematica": 10,
+    "redacao": 10,
+    "situacao" : "APROVADO",
+    "media" : 10,
+    "nome" : "Beatriz",
+    "turma": "2022"
+},
+{
+    "ciencias_da_natureza": 10,
+    "ciencias_humanas": 10,
+    "linguagens_codigos": 10,
+    "matematica": 10,
+    "redacao": 10,
+    "situacao" : "APROVADO",
+    "media" : 10,
+    "nome" : "Jane" ,
+    "turma": "2022"
+}
+/* outras alunas... */
+];
+```
+
+Continuar no para sala, não é necessário criar uma API do zero.
 
 Terminou o exercício? Dá uma olhada nessa checklist e confere se tá tudo certinho, combinado?!
 
