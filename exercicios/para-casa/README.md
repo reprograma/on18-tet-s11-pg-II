@@ -8,15 +8,35 @@ Para finarlizamos o nosso projeto guiado, ficou faltando um endpoint que retorne
 
 #### Regras de negocio
 
-Será necessario filtrar as alunas pela turma que foi recebida via parametros
-Será necessário obter a média de todas as disciplinas e a partir dessa média definir a situacao da aluna
+1. Será necessario filtrar as alunas pela turma que foi recebida via parametros
+2. Será necessário obter a média de todas as disciplinas.
+
+3. Com essa média definir a situacao das alunas
+
+regras: 
 
 nota maior que 6 - "APROVADA"
 nota maior que 5 e menor que 6 - "RECUPERACAO"
 nota menor que 5 - "REPROVADA"
 
+Vcs vão precisar construir a resposta para corresponder ao exemplo abaixo
+
+```json
+{
+    "ciencias_da_natureza": 10,
+    "ciencias_humanas": 10,
+    "linguagens_codigos": 10,
+    "matematica": 10,
+    "redacao": 10,
+    "situacao" : "APROVADA",
+    "media" : 10,
+    "nome" : "Beatriz",
+    "turma": "2022"
+},
+```
+
 Detalhes do endpoint:
-GET /alunas/
+GET /alunas/{turma}/boletim
 
 resposta esperada:
 
@@ -28,7 +48,7 @@ resposta esperada:
     "linguagens_codigos": 10,
     "matematica": 10,
     "redacao": 10,
-    "situacao" : "APROVADO",
+    "situacao" : "APROVADA",
     "media" : 10,
     "nome" : "Beatriz",
     "turma": "2022"
