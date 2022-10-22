@@ -92,7 +92,7 @@ const obterNotas = async (req, res) => {
 }
 
 const obterBoletim = async (req, res) => {
-
+   // para casa
 }
 
 const criarAluna = async (req, res) => {
