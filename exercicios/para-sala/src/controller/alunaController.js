@@ -99,6 +99,9 @@ const obterBoletins = async (req, res) => {
     const alunas = await db()
 
     const alunasEncontradas = alunas.filter(alunaAtual => alunaAtual.turma == turma)
+    if (alunasEncontradas.length == 0) {
+      return res.status(404).json({ message: `Nenhuma aluna encontrada para a turma de ${turma}.` })
+    }
     let notasAlunas;
     let media;
     let alunasFiltradas = [];
