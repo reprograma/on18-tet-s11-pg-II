@@ -1,9 +1,9 @@
 const rotas = require("express").Router()
 const controller = require("../controller/alunaController")
 
-rotas.get("/", controller.obterTodasAsAlunas) 
-rotas.get("/:id/notas", controller.obterNotas) 
-rotas.get("/:turma/boletim", controller.obterBoletim)
+rotas.get("/", controller.obterTodasAsAlunas)
+rotas.get("/:id/notas", controller.obterNotas)
+rotas.get("/:turma/boletins", controller.obterBoletins)
 rotas.get("/:id", controller.obterAlunaPorId)
 
 rotas.post("/criar", controller.criarAluna)
