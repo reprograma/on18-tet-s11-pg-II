@@ -94,7 +94,6 @@ const obterNotas = async (req, res) => {
 
 const obterBoletins = async (req, res) => {
   const { turma } = req.params
-
   try {
     const alunas = await db()
     const alunasEncontradas = alunas.filter(alunaAtual => alunaAtual.turma == turma)
@@ -121,7 +120,7 @@ const obterBoletins = async (req, res) => {
         matematica: aluna.notas.matematica,
         redacao: aluna.notas.redacao,
         situacao: situacao,
-        media: media,
+        media: Number(media.toFixed(2)),
         nome: aluna.nome_social || aluna.nome_registro,
         turma: aluna.turma
       }
