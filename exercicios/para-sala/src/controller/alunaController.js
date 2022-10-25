@@ -99,6 +99,10 @@ const obterBoletim = async (req, res) => {
 
     const alunasEncontradas = alunas.filter(alunaAtual => alunaAtual.turma == turma)
 
+    if (alunasEncontradas.length == 0) {
+      return res.status(404).json({ 
+        message: `Nenhuma aluna encontrada para a turma de ${turma}.` })
+    }
     let notasAlunas;
     let media;
     let alunasFiltradas = [];
@@ -107,9 +111,9 @@ const obterBoletim = async (req, res) => {
       notasAlunas = Object.values(aluna.notas)
       media = (notasAlunas.reduce((acumulador, nota) => Number(acumulador) + Number(nota))) / 5
 
-      if (media > 6) {
+      if (media >= 6) {
         situacao = "APROVADA"
-      } else if (media > 5) {
+      } else if (media >= 5) {
         situacao = "RECUPERAÇÃO"
       } else {
         situacao = "REPROVADA"
