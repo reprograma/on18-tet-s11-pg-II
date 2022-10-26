@@ -126,7 +126,7 @@ retorna todas as alunas
 },
 ```
 ---
-#### `GET` /alunas/{id}/notas
+#### `[GET]` /alunas/{id}/notas
 retorna as notas de uma aluna
 
 > É necessário o ID da aluna
@@ -168,7 +168,7 @@ retorna o boletim de todas as alunas daquela turma
 }];
 ```
 ---
-#### `[POST]` /alunas
+#### `[POST]` /alunas/criar
 cadastra uma aluna
 
 > Requirido body
@@ -275,7 +275,7 @@ cadastra as notas de uma aluna
  },
 ```
 ---
-#### `[PUT]`/alunas/{id}
+#### `[PUT]`/alunas/{id}/atualizar
 Atualiza uma aluna
 
 Body [exemplo](#post-alunas)
@@ -337,7 +337,7 @@ Body [exemplo](#post-alunasalunaidnotas)
 ```
 
 ---
-#### `[DELETE]`/alunas/{id}
+#### `[DELETE]`/alunas/{id}/deletar
 Deleta uma aluna
 
 > É necessário o ID da aluna
@@ -385,7 +385,7 @@ Deleta uma aluna
 
 
 ### Exercícios 
-* [Exercicio para sala](./exercicios/para-sala/README.md
+* [Exercicio para sala](./exercicios/para-sala/README.md)
 * [Exercicio para casa](./exercicios/projeto-casa/README.md)
 
 ### Material da aula 
