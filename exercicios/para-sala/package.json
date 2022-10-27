@@ -1,0 +1,18 @@
+{
+  "name": "para-sala",
+  "version": "1.0.0",
+  "description": "- [ ] - GET /alunas/ - deve ser possivel filtrar por nome,nome_social,cidade,bairro,mae,pai\r - [ ] - GET /alunas/{id}/notas - deve retorna todas as notas da aluna\r - [ ] - GET /alunas/{id} - deve retorna uma aluna por id\r - [ ] - POST /alunas - deve criar uma aluna\r - [ ] - POST /alunas/notas - deve poder insirir uma nota no sistema\r - [ ] - PUT /alunas/{id} - deve poder atualizar uma aluna\r - [ ] - PUT /alunas/{id}/notas - deve poder atualizar uma nota\r - [ ] - DELETE /alunas/{id} - deve poder deletar uma aluna",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
