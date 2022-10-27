@@ -1,6 +1,7 @@
 const db = require("../database/db")
 
 const crypto = require("crypto")
+const { response } = require("../app")
 
 const obterTodasAsAlunas = async (req, res) => {
    try {
@@ -56,6 +57,19 @@ const obterTodasAsAlunas = async (req, res) => {
 }
 
 const obterAlunaPorId = async (req, res) => {
+ const { ids } = req.params
+ try {
+    const alunas = await db()
+    let alunasEncontradasPorId = alunas.find(aluna => aluna.id == ids)
+    if(alunasEncontradasPorId == undefined){
+      return res.status(404).send({ message: "Aluna não encontrada"})
+    }
+    
+    res.status(200).send(alunasEncontradasPorId)
+ } catch (error) {
+    res.status(500).send({ message: error.message})
+ }
+
    const { id } = req.params
 
    try {
@@ -103,7 +117,50 @@ const obterNotas = async (req, res) => {
 }
 
 const obterBoletim = async (req, res) => {
-   // para casa
+  
+  const alunas = await db();
+    const {turma} = req.params
+    resultado = []
+
+    try{
+        const alunasEncontradas = alunas.filter((alunaAtual)=> alunaAtual.turma == turma)
+
+        alunasEncontradas.forEach(aluna => {
+
+            const {ciencias_da_natureza, ciencias_humanas, linguagens_codigos,matematica,redacao} = aluna.notas
+
+            let situacao;
+
+            const media = 
+            (Number(ciencias_da_natureza) + 
+            Number(ciencias_humanas) + 
+            Number(linguagens_codigos) + 
+            Number(redacao) + 
+            Number(matematica)) 
+            / 5;
+
+            if (media >=6){
+                situacao = "Aprovada"
+            }else if(media < 6 && media >= 5){
+                situacao = "Recuperação"
+            }else{
+                situacao = "Reprovada"
+            }
+
+            let descricao = {
+                "aluna": aluna.nome_social || aluna.nome_registro,
+                "boletim": aluna.notas,
+                "Média final": media,
+                "Situação": situacao
+            }
+
+            resultado.push(descricao)
+        })
+
+        res.status(200).send(resultado)
+    }catch(error){
+        res.status(500).send({message: error.message})
+    }
 }
 
 const criarAluna = async (req, res) => {
@@ -141,6 +198,48 @@ const criarAluna = async (req, res) => {
 }
 
 const atualizarAluna = async (req, res) => {
+  try{
+    const alunas = await db()
+    const alunasEncontrada = alunas.find(aluna => aluna.id == id)
+    
+    if (alunasEncontrada == undefined) return res.status(404).send({
+      message:"Alunas não encontradas"
+    })
+    
+    const chaves = Object.keys(alunasEncontrada)
+    
+    if(cpf){
+      throw new Error("o cpf não pode se atualizado")
+    }
+    
+    chaves.forEach(chave => {
+      let dadoAtualizado = alunaBody [chaves]
+      let existeDado = new Boolean(dadoAtualizado)
+      if(existeDado ==  true) alunasEncontrada[chave]
+    })
+    
+    res.status(200).send(alunasEncontrada)
+    } catch(Error) {
+      res.status(500).send({message: error.message })
+    }
+}
+
+const deletarAluna = async (req, res) => {
+  const { ids } = req.params
+
+  try{
+    const alunas = await db()
+    const alunaIndice = alunas.findIndex(aluna => aluna.id == ids)
+    if (alunaIndice === -1) return res.status(404).send({
+      message: "Aluna não encontrada"
+    })
+
+    alunas.splice(alunaIndice, 1)
+
+    res.status(200).send({ message: "Aluna deletada com sucesso"})
+  } catch (Error){
+    res.status(500).send({message:Error.message})
+  }
    const { id } = req.params
    // 
    const {
@@ -176,7 +275,7 @@ const atualizarAluna = async (req, res) => {
    }
 }
 
-const deletarAluna = async (req, res) => {
+const deletarAlunas = async (req, res) => {
    const { id } = req.params
 
    try {
@@ -196,8 +295,9 @@ const deletarAluna = async (req, res) => {
    }
 }
 
+
 module.exports = {
-  deletarAluna,
+  deletarAlunas,
   criarAluna,
   atualizarAluna,
   obterTodasAsAlunas,

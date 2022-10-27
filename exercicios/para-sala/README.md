@@ -4,9 +4,9 @@
 
 ### TODO
 
-- [ ] - GET /alunas/ - deve ser possivel filtrar por nome,nome_social,cidade,bairro,mae,pai
+- [x] - GET /alunas/ - deve ser possivel filtrar por nome,nome_social,cidade,bairro,mae,pai
 - [ ] - GET /alunas/{id}/notas - deve retorna todas as notas da aluna
-- [ ] - GET /alunas/{id} - deve retorna uma aluna por id
+- [x] - GET /alunas/{id} - deve retorna uma aluna por id
 - [ ] - POST /alunas - deve criar uma aluna
 - [ ] - POST /alunas/notas - deve poder insirir uma nota no sistema
 - [ ] - PUT /alunas/{id} - deve poder atualizar uma aluna
