@@ -56,7 +56,23 @@ const obterTodasAsAlunas = async (req, res) => {
 }
 
 const obterAlunaPorId = async (req, res) => {
+  const { id } = req.params
 
+  try {
+    const alunas = await db()
+  
+    const alunaEncontrada = alunas
+      .find(alunaAtual => alunaAtual.id == id)
+
+    if( !alunaEncontrada ) {
+      return res.status(404).send("Aluna não encontrada");
+    }
+
+    res.status(200).send(alunaEncontrada);
+
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
 }
 
 const obterNotas = async (req, res) => {
@@ -92,7 +108,44 @@ const obterNotas = async (req, res) => {
 }
 
 const obterBoletim = async (req, res) => {
-   // para casa
+  try {
+    const { turma } = req.params
+    const alunas = await db()
+    const alunasDaTurma = alunas.filter( a=> a.turma.toLowerCase() == turma );
+    if (alunasDaTurma.length == 0) {
+      return res.status(404).json({ message: `Turma ${turma} inexiste ou está sem alunos.` })
+    }
+    const entradasBoletim = alunasDaTurma.map( a => {
+      const notas = Object.values(a.notas);
+      const media = notas.reduce( (soma, nota) => parseFloat(nota) + soma, 0 ) / notas.length;
+      let situacao = "";
+      if( media >= 6) {
+        situacao = "APROVADA";
+      } else if( media >= 5) {
+        situacao = "RECUPERACAO";
+      } else {
+        situacao = "REPROVADA";
+      };
+
+      let res = {
+        "situacao" : situacao,
+        "media" : media,
+        "nome" : a.nome_registro,
+        "turma": req.params.turma
+      };
+
+      res = Object.assign(res, a.notas);
+
+      return res;
+
+    } );
+
+    res.status(200).send(entradasBoletim);
+  } catch (error) {
+    res.status(500).send({
+     message: error.message
+    })
+  }
 }
 
 const criarAluna = async (req, res) => {
