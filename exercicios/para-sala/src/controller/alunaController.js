@@ -6,6 +6,7 @@ const obterTodasAsAlunas = async (req, res) => {
   try {
     const alunas = await db();
 
+
     const { nome, cidade, bairro, pai, mae } = req.query;
 
     let alunasFiltradas = alunas.slice();
@@ -74,6 +75,22 @@ const obterAlunaPorId = async (req, res) => {
   }
 };
 
+const obterAlunaPorId = async (req, res) => {
+   const { id } = req.params
+
+   try {
+      const alunas = await db()
+      const alunaEncontrada = alunas.find(aluna => aluna.id  == id)
+      if (alunaEncontrada == undefined) {
+        return res.status(404).send({ message: "Aluna não encontrada"})
+      }
+      res.status(200).send(alunaEncontrada)
+   } catch (error) {
+    res.status(500).send({ message: error.message })
+   }
+}
+
+
 const obterNotas = async (req, res) => {
   const { id } = req.params;
 
@@ -106,7 +123,8 @@ const obterNotas = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
-// para casa
+
+// Homework
 const obterBoletim = async (req, res) => {
   try {
     const alunas = await db();
