@@ -2027,7 +2027,7 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "1021"
   },
   {
     "id": "38ca8fba-7a82-4ffe-b66b-050f1e4bfb1b",
@@ -2062,11 +2062,11 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "1021"
   },
   {
     "id": "01fafa0c-b033-4ca8-af59-ea287e70ae3d",
-    "nome_social": null,
+    "nome_social": "Greetchen",
     "nome_registro": "Fabiana Renata Porto",
     "genero": "Mulher Cis",
     "sexo": "F",
@@ -2097,6 +2097,8 @@
       "matematica": "8.24",
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "1021"
   }
 ]
+
+
