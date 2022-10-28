@@ -55,6 +55,7 @@ const obterTodasAsAlunas = async (req, res) =>{
     }
 }
 
+
 const obterAlunaPorId = async (req, res) =>{
     const {id} = req.params
 
@@ -69,6 +70,7 @@ const obterAlunaPorId = async (req, res) =>{
         res.status(500).send({message: error.message})
     }
 }
+
 
 const obterNotas = async (req, res) =>{
     const { id } = req.params
@@ -99,9 +101,46 @@ const obterNotas = async (req, res) =>{
     }
 }
 
-const obterBoletim = async (req, res) => {
 
+const obterBoletim = async (req, res) => {
+    const {turma} = req.params
+
+    try {
+        const alunas =  await db()
+        
+        const alunasFiltradas = alunas.filter(alunaAtual => alunaAtual.turma == turma)
+        let boletim = []
+
+        for (const aluna of alunasFiltradas) {
+            
+            const alunaNotas = aluna.notas
+            
+            const {
+            ciencias_da_natureza, ciencias_humanas, linguagens_codigos, matematica, redacao
+        } = alunaNotas
+
+            const media = (Object.values(alunaNotas).reduce((acumulador, nota) => Number(acumulador) + Number(nota))) / 5
+
+            const infoAlunas = {
+                ciencias_da_natureza,
+                ciencias_humanas,
+                linguagens_codigos,
+                matematica,
+                redacao, 
+                "media": media.toFixed(2),
+                "nome": aluna.nome_social || aluna.nome_registro,
+                "turma": aluna.turma
+            }
+            
+            boletim.push(infoAlunas)
+    }
+    res.status(200).send(boletim)
+    
+        } catch (error) {
+        res.status(500).send({message: error.message})
+    }
 }
+
 
 const criarAluna = async (req, res) => {
     try {
@@ -136,6 +175,7 @@ const criarAluna = async (req, res) => {
         })
     }
 }
+
 
 const atualizarAluna = async (req, res) => {
     const { id } = req.params
@@ -178,6 +218,7 @@ const atualizarAluna = async (req, res) => {
         })
     }
 }
+
 
 const deletarAluna = async (req, res) => {
     // um meio de deletar
