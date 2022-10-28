@@ -4,11 +4,11 @@ const alunasRotas = require("./routes/alunaRotas")
 const app = express()
 
 app.use(express.json())
+
 app.use(cors())
 
-// rota inicial da api
 app.get("/", (req, res) => {
-  res.status(200).send("API ONNN")
+  res.status(200).send("API ON")
 })
 
 app.use("/alunas", alunasRotas)

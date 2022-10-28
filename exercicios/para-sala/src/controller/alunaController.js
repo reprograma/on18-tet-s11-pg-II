@@ -12,15 +12,15 @@ const obterTodasAsAlunas = async (req, res) => {
   
      if (nome) {
         alunasFiltradas = alunasFiltradas.filter(alunaAtual => {
-            const nome_registro = alunaAtual.nome_registro.toLowerCase()
+            const nomeRegistro = alunaAtual.nomeRegistro.toLowerCase()
             
-            let nome_social = alunaAtual.nome_social
+            let nomeSocial = alunaAtual.nome_social
 
-            if (nome_social)  { 
-              nome_social = nome_social.toLowerCase()
-              return nome_social.includes(nome) || nome_registro.includes(nome)
+            if (nomeSocial)  { 
+              nomeSocial = nomeSocial.toLowerCase()
+              return nomeSocial.includes(nome) || nomeRegistro.includes(nome)
             }
-            return  nome_registro.includes(nome) 
+            return  nomeRegistro.includes(nome) 
         })
      }
 
@@ -56,7 +56,19 @@ const obterTodasAsAlunas = async (req, res) => {
 }
 
 const obterAlunaPorId = async (req, res) => {
+  const { id } = req.params
 
+  try {
+      const alunas = await db()
+      const alunaEncontrada = aluna.find(aluna => aluna.id == id)
+
+      if (alunaEncontrada == undefined){
+          return res.status(404).send({message: `Aluna com ${id} não foi encontrada`})
+      }
+      res.status(200).send(alunaEncontrada)
+  } catch (error) {
+      res.status(500).send({message: error.message})
+  }
 }
 
 const obterNotas = async (req, res) => {
@@ -81,7 +93,7 @@ const obterNotas = async (req, res) => {
       matematica,
       redacao,
       turma: alunaEncontrada.turma,
-      nome: alunaEncontrada.nome_social || alunaEncontrada.nome_registro
+      nome: alunaEncontrada.nome_social || alunaEncontrada.nome_registro,
     }
 
     res.status(200).send(resposta)
@@ -92,7 +104,58 @@ const obterNotas = async (req, res) => {
 }
 
 const obterBoletim = async (req, res) => {
-   // para casa
+  const alunas = await db();
+  const { turma } = req.params
+  boletim = []
+
+  try {
+      const alunasEncontradas = alunas.filter(alunaAtual => alunaAtual.turma == turma)
+
+      if (alunasEncontradas.length == 0) return res.status(404).json({ 
+        message: `Não encontramos nenhuma turma com o id: ${turma}.` 
+      })
+      
+      alunasEncontradas.forEach(aluna => {
+          const { 
+            ciencias_da_natureza, 
+            ciencias_humanas, 
+            linguagens_codigos,
+            matematica,
+            redacao 
+          } = aluna.notas
+
+          let situacao;
+
+          const media = (
+            parseFloat(ciencias_da_natureza) + 
+            parseFloat(ciencias_humanas) + 
+            parseFloat(linguagens_codigos) + 
+            parseFloat(redacao) + 
+            parseFloat(matematica)
+          ) / 5;
+
+          if (media >= 6) {
+            situacao = "APROVADA"
+          }else if(media < 6 && media >= 5) {
+            situacao = "RECUPERACAO"
+          }else {
+            situacao = "REPROVADA"
+          }
+
+          let descricao = {
+            "aluna": aluna.nome_social || aluna.nome_registro,
+            "boletim": aluna.notas,
+            "media_final": media,
+            "situação": situacao
+          }
+
+          boletim.push(descricao)
+      })
+
+      res.status(200).send(boletim)
+  } catch(error) {
+      res.status(500).send({message: error.message})
+  }
 }
 
 const criarAluna = async (req, res) => {
