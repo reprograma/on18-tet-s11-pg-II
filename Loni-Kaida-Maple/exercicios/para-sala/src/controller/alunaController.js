@@ -142,10 +142,61 @@ const createStudent = async (req, res) => {
 }
 
 const updateStudent = async (req, res) => {
+ 
+      const { id } = req.params;
+       
+      const {
+      cpf, id: idDeletado,
+       ...alunaBody
+     } = req.body;
+      
+      try {
+         const students = await db();
+         const foundStudent = students.find(student => student.id == id);
+         
+         if (foundStudent == undefined) return res.status(404).send({
+           message: "Aluna não encontrada."
+         })
+   
+         const keys = Object.keys(foundStudent);
+   
+         if (cpf) {
+           throw new Error("O Cpf não pode ser atualizado.");
+         }
+      
+         keys.forEach(key => {
+           let updatedData = alunaBody[key];
+           let existentData = new Boolean(updatedData);
+           if (existentData == true) foundStudent[key] = updatedData;
+         })
+   
+         res.status(200).send(foundStudent);
+      } catch (error) {
+        res.status(500).send({
+         message: error.message
+        })
+      }
 
 }
 
 const deleteStudent = async (req, res) => {
+    const { id } = req.params
+
+   try {
+     const students = await db()
+     const studentIndex = students.findIndex(student => student.id == id)
+     
+     if (studentIndex === -1) return res.status(404).send({
+       message: "Aluna não encontrada."
+     })
+    
+     students.splice(studentIndex, 1)
+
+     res.status(200).send({ message: "Aluna deletada com sucesso!"})
+     
+   } catch (error) {
+      res.status(500).send({ message: error.message })
+   }
 
 }
 
