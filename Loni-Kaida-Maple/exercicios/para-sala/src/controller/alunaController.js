@@ -23,7 +23,9 @@ const getAllStudents = async (req, res) => {
         }
 
         if(cidade){
-            //filterdStudents = filterdStudents.filter
+            filterdStudents = filterdStudents.filter(atualStudent => {
+                return atualStudent.cidade == cidade;
+            })
         }
 
         if(bairro){
@@ -46,7 +48,7 @@ const getAllStudents = async (req, res) => {
 
 
         res.status(200).send(students);
-        console.log("sendin request  "+students);
+        console.log("sending request  "+students);
     } catch (error) {
         res.status(500).send({
             message: error.message
@@ -56,6 +58,20 @@ const getAllStudents = async (req, res) => {
 
 const getStudentById = async (req, res) => {
 
+    const { id } = req.params;
+
+   try {
+      const students = await db();
+      const foundStudent = students.find(student => student.id  == id);
+
+      if (foundStudent == undefined) {
+        return res.status(404).send({ message: "Aluna não encontrada"});
+      }
+      res.status(200).send(foundStudent);
+
+   } catch (error) {
+    res.status(500).send({ message: error.message });
+   }
 }
 
 const getGrades = async (req, res) => {
@@ -64,9 +80,13 @@ const getGrades = async (req, res) => {
     try {
         const students = await db();
 
-        const foundStudent = students.filter(atualStudent => atualStudent.id == id);
+        const foundStudent = students.find(atualStudent => atualStudent.id == id);
 
         const grades = foundStudent.notas;
+
+        
+        console.log(grades);
+        console.log(foundStudent.nome_social || foundStudent.nome_registro);
 
         const {
             ciencias_da_natureza, ciencias_humanas, linguagens_codigos, matematica, redacao
@@ -83,6 +103,7 @@ const getGrades = async (req, res) => {
         }
 
         res.status(200).send(awnser);
+
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
@@ -110,9 +131,12 @@ const createStudent = async (req, res) => {
 
         studantBody.id = crypto.randomUUID();
         students.push(studantBody);
+        res.status(201).send(studantBody)
 
     } catch (error) {
-        
+        res.status(500).send({
+            message: error.message
+           }) 
     }
 
 }
@@ -126,6 +150,58 @@ const deleteStudent = async (req, res) => {
 }
 
 const getReportCard = async (req, res) => {
+    // para casa
+    
+    const { turma } =req.params;
+
+    try {
+        
+        const students = await db();
+        let filterdStudents = students.slice();
+
+        filterdStudents = filterdStudents.find(atualStudent => {
+            atualStudent.turma == turma;
+
+            const grades = atualStudent.notas;
+
+            const {
+                ciencias_da_natureza, ciencias_humanas, linguagens_codigos, matematica, redacao
+            } = grades;
+
+            let sum = (ciencias_da_natureza+ciencias_humanas+linguagens_codigos+matematica+redacao)/5;      //atualStudent.notas.lenght;
+            let situation;
+
+            if(sum>6){
+                situation = "APROVADA";
+            }
+            else if(sum>5 && sum<6){
+                situation = "RECUPERAÇÃO";
+            }
+            else{
+                situation = "REPROVADA";
+            }
+
+            const awnser = {
+                ciencias_da_natureza,
+                ciencias_humanas,
+                linguagens_codigos,
+                matematica,
+                redacao,
+                media: sum,
+                situacao: situation,
+                nome: atualStudent.nome_social || atualStudent.nome_registro,
+                turma: atualStudent.turma
+            }
+    
+            res.status(200).send(awnser);
+
+
+
+        });
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
 
 }
 
