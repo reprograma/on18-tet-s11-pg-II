@@ -104,6 +104,50 @@ const obterNotas = async (req, res) => {
 
 const obterBoletim = async (req, res) => {
    // para casa
+
+   const alunas = await db();
+   const {turma} = req.params
+   resultado = []
+
+   try{
+       const alunasEncontradas = alunas.filter((alunaAtual)=> alunaAtual.turma == turma)
+
+       alunasEncontradas.forEach(aluna => {
+
+           const {ciencias_da_natureza, ciencias_humanas, linguagens_codigos,matematica,redacao} = aluna.notas
+
+           let situacao;
+
+           const media = 
+           (parseFloat(ciencias_da_natureza) + 
+           parseFloat(ciencias_humanas) + 
+           parseFloat(linguagens_codigos) + 
+           parseFloat(redacao) + 
+           parseFloat(matematica)) 
+           / 5;
+
+           if (media >=6){
+               situacao = "Aprovada"
+           }else if(media < 6 && media >= 5){
+               situacao = "Recuperação"
+           }else{
+               situacao = "Reprovada"
+           }
+
+           let descricao = {
+               "aluna": aluna.nome_social || aluna.nome_registro,
+               "boletim": aluna.notas,
+               "Média final": media,
+               "Situação": situacao
+           }
+
+           resultado.push(descricao)
+       })
+
+       res.status(200).send(resultado)
+   }catch(error){
+       res.status(500).send({message: error.message})
+   }
 }
 
 const criarAluna = async (req, res) => {
