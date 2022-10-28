@@ -56,7 +56,18 @@ const obterTodasAsAlunas = async (req, res) => {
 }
 
 const obterAlunaPorId = async (req, res) => {
+   const { id } = req.params
 
+   try {
+      const alunas = await db()
+      const alunaEncontrada = alunas.find(aluna => aluna.id  == id)
+      if (alunaEncontrada == undefined) {
+        return res.status(404).send({ message: "Aluna não encontrada"})
+      }
+      res.status(200).send(alunaEncontrada)
+   } catch (error) {
+    res.status(500).send({ message: error.message })
+   }
 }
 
 const obterNotas = async (req, res) => {
@@ -130,11 +141,59 @@ const criarAluna = async (req, res) => {
 }
 
 const atualizarAluna = async (req, res) => {
+   const { id } = req.params
+   // 
+   const {
+   cpf, id: idDeletado, // extraimos(remover) o cpf e o id do body
+    ...alunaBody // agrupou todo o resto, sem o id e o cpf
+  } = req.body
+   // delete alunaBody.cpf; delete alunaBody.id
+   try {
+      const alunas = await db()
+      const alunaEncontrada = alunas.find(aluna => aluna.id == id)
+      
+      if (alunaEncontrada == undefined) return res.status(404).send({
+        message: "Aluna não encontrada."
+      })
 
+      const chaves = Object.keys(alunaEncontrada)
+
+      if (cpf) {
+        throw new Error("O Cpf não pode ser atualizado.")
+      }
+   
+      chaves.forEach(chave => {
+        let dadoAtualizado = alunaBody[chave] // acessa a propriedade(valor) que vem body
+        let existeDado = new Boolean(dadoAtualizado) // valida se existe um dado
+        if (existeDado == true) alunaEncontrada[chave] = dadoAtualizado // atualiza o dado
+      })
+
+      res.status(200).send(alunaEncontrada)
+   } catch (error) {
+     res.status(500).send({
+      message: error.message
+     })
+   }
 }
 
 const deletarAluna = async (req, res) => {
+   const { id } = req.params
 
+   try {
+     const alunas = await db()
+     const alunaIndice = alunas.findIndex(aluna => aluna.id == id)
+     
+     if (alunaIndice === -1) return res.status(404).send({
+       message: "Aluna não encontrada."
+     })
+    
+     alunas.splice(alunaIndice, 1)
+
+     res.status(200).send({ message: "Aluna deletada com sucesso!"})
+     
+   } catch (error) {
+      res.status(500).send({ message: error.message })
+   }
 }
 
 module.exports = {
