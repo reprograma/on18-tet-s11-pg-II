@@ -93,6 +93,53 @@ const obterNotas = async (req, res) => {
 
 const obterBoletim = async (req, res) => {
    // para casa
+   const {turma} = req.params
+
+   try {
+    const alunas = await db()
+    const alunasEncontrada = alunas.filter(alunaAtual => alunaAtual.turma == turma)
+    if (alunasEncontrada.length == 0) {
+      return res.status(404).json({message: `Nenhuma aluna encontrada nessa turma de ${turma}.`})
+    }
+
+    let notasDasAlunas;
+    let mediaAluna;
+    let alunasFiltradas = [];
+
+    alunasEncontrada.forEach(aluna => {
+      notasDasAlunas = Object.values(aluna.notas)
+      mediaAluna = (notasDasAlunas.reduce((acumulador, nota) => Number(acumulador) + Number(nota))) / 5
+
+      if (mediaAluna >= 6) {
+        situacao = "APROVADA"
+      }else if (mediaAluna > 5) {
+        situacao = "RECUPERACAO"
+      }else {
+        situacao = "REPROVADA"
+      }
+
+      const resposta = {
+        ciencias_da_natureza: aluna.notas.ciencias_da_natureza,
+        ciencias_humanas: aluna.notas.ciencias_humanas,
+        linguagens_codigos: aluna.notas.linguagens_codigos,
+        matematica: aluna.notas.matematica,
+        redacao: aluna.notas.redacao,
+        situacao: situacao,
+        mediaAluna: mediaAluna,
+        mediaAluna: Number(mediaAluna.toFixed(2)),
+        nome: aluna.nome_social || aluna.nome_registro,
+        turma: aluna.turma
+      }
+
+      alunasFiltradas.push(resposta)
+      
+    });
+
+    res.status(200).send(alunasFiltradas)    
+  
+   } catch (error) {
+    res.status(500).send({ message: error.message})
+   }
 }
 
 const criarAluna = async (req, res) => {
@@ -130,7 +177,25 @@ const criarAluna = async (req, res) => {
 }
 
 const atualizarAluna = async (req, res) => {
+  const { id } = req.params
+  const { cpf, id: idDeletado,...alunaBody } = req.body
+  // deletar alunaBody.cpf; delete a alunaBody.id
+  // achar aluna e atualizar os dados q vem do body
+  try {
+    const alunas = await db()
+    const alunaEncontrada = alunas.find(aluna => aluna.id ==id)
+    const chaves = Object.keys(alunaEncontrada)
+    
+    if ( cpf ){
+      throw new Error("O cpf não pode ser atualizado.")
+    }
+    
 
+  } catch (error) {
+    res.status(500).send({
+      message: error.message
+    })
+  }
 }
 
 const deletarAluna = async (req, res) => {
