@@ -32,7 +32,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "5471b924-aedf-41a4-946f-d201b074f492",
@@ -67,7 +68,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "7dac422f-0fe5-471e-8721-4e857a955614",
@@ -102,7 +104,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "e6d01324-8d26-44da-868e-9497675c66a8",
@@ -137,7 +140,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "4ff54f6d-bd60-421e-82c0-bd50345cd27c",
@@ -172,7 +176,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "175ddc15-8388-43c2-8888-28f40f2c264b",
@@ -207,7 +212,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": true
   },
   {
     "id": "4832d623-e196-48a5-b0ed-c82f8b2fd6d2",
@@ -242,7 +248,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "b5f7f3aa-42e6-45b8-91db-99e55f81f3ac",
@@ -277,7 +284,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "9a88f360-cf48-47c9-b0ba-de532cbee97f",
@@ -312,7 +320,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "4299a0d8-4e58-4a19-84c6-ee60a321b557",
@@ -347,7 +356,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "aefa8435-90ae-445f-bd69-026a30521d82",
@@ -382,7 +392,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "5cff6bea-9a69-4155-9f94-540c9afbb545",
@@ -417,7 +428,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "aeb739b4-543d-4742-a7a0-ef98fed0d979",
@@ -452,7 +464,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": true
   },
   {
     "id": "1e2bb75c-3852-4af8-bbe0-63e7d1a4b0c4",
@@ -487,7 +500,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "27f42d7e-2b02-45b2-8dc1-48b54c29f358",
@@ -522,7 +536,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "e9167d5b-6bc5-4f71-ae5d-9ebbc02cd753",
@@ -557,7 +572,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "ca7f5503-d104-4168-a3bd-3d5db5c4fb2f",
@@ -592,7 +608,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "fa16d933-08b1-4cd6-add0-8a1abfe1312c",
@@ -627,7 +644,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "9d46388b-f7f7-4b18-9231-2993e3764170",
@@ -662,7 +680,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "06b3b266-12f4-4071-ae95-150ede08cad4",
@@ -697,7 +716,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "9c0e3b51-56b8-4f8d-a92f-eeff9816dcea",
@@ -732,7 +752,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "98c190cf-dba2-4a02-87e5-5b28b23ff414",
@@ -767,7 +788,8 @@
       "matematica": "4.29",
       "redacao": "3.10"
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": true
   },
   {
     "id": "1ff0aa03-1dee-4ab1-b298-d3832c774355",
@@ -802,7 +824,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "1d47b7d4-a9e7-4081-82ac-4398093c94ee",
@@ -837,7 +860,8 @@
       "matematica": 0,
       "redacao": "0.60"
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "4953447a-db14-48b6-964e-a086dc127831",
@@ -872,7 +896,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "f00be4cd-2ff4-4e38-983c-47456b11ea03",
@@ -907,7 +932,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "ffd5567d-0635-4cee-89dc-c303f1716bc7",
@@ -942,7 +968,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "d3e36eb6-38ba-4511-899b-d3f5006f6a28",
@@ -977,7 +1004,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "46a11cf8-dfc8-413f-b9d5-c877db214cc3",
@@ -1012,7 +1040,8 @@
       "matematica": 0,
       "redacao": "9.73"
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "53a4fc3a-61fe-4a50-becb-ef8a03851d45",
@@ -1047,7 +1076,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "6e6e6fe7-b5b2-4613-9927-36da15ff50cb",
@@ -1082,7 +1112,8 @@
       "matematica": 0,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": true
   },
   {
     "id": "fb72deed-bce6-4ed9-b0f4-242d7a63181c",
@@ -1117,7 +1148,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "3e4c21c5-bb35-427e-be94-bcdb396e8d3a",
@@ -1152,7 +1184,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": true
   },
   {
     "id": "d6906e5c-fe32-4c54-b22d-1627e750533b",
@@ -1187,7 +1220,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "42a538c8-c00e-47ae-90ec-4297ba459eba",
@@ -1222,7 +1256,8 @@
       "matematica": 0,
       "redacao": "2.49"
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "28a207d6-686b-4265-a8cd-4ec5d962a234",
@@ -1257,7 +1292,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": true
   },
   {
     "id": "134a7895-c527-47cc-af8b-4609ddb454b0",
@@ -1292,7 +1328,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": true
   },
   {
     "id": "ee8cc150-12b4-456d-a712-4596f0cba5cd",
@@ -1327,7 +1364,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "1bcd0445-b6b3-4d95-b659-d8b21340df4f",
@@ -1362,7 +1400,8 @@
       "matematica": 0,
       "redacao": "6.46"
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "540ff372-70dd-4270-86c8-f6fb810557b1",
@@ -1397,7 +1436,8 @@
       "matematica": 0,
       "redacao": 0
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "c21e5b4d-6854-42d6-aa18-3a54a55131a4",
@@ -1432,7 +1472,8 @@
       "matematica": "3.36",
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "4ac8ecd0-3d9c-40af-865b-e7b6727d44f4",
@@ -1467,7 +1508,8 @@
       "matematica": 10,
       "redacao": "0.60"
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": true
   },
   {
     "id": "7e969d69-0090-45b8-ba33-09f8f3d7538c",
@@ -1502,7 +1544,8 @@
       "matematica": "8.91",
       "redacao": "0.12"
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "ab3d80ab-bd60-4ab1-92fe-2001040d3d0f",
@@ -1537,7 +1580,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "e45074ba-017d-4316-80aa-25f22e92e3b5",
@@ -1572,7 +1616,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "8b6b30e3-6835-4308-b8d2-cda96db757ad",
@@ -1607,7 +1652,8 @@
       "matematica": "2.02",
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "ef3cfb88-6097-4942-9b59-e4531db123c9",
@@ -1642,7 +1688,8 @@
       "matematica": "2.31",
       "redacao": "1.78"
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "a28eda91-504e-4e85-a016-95c753942d21",
@@ -1677,7 +1724,8 @@
       "matematica": "7.37",
       "redacao": "0.21"
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "ad9c8e7e-988d-47fe-9208-15460a1fe657",
@@ -1712,7 +1760,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "38e5bb93-2aa8-4f74-b0c4-cfc911818d1e",
@@ -1747,7 +1796,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "978b696d-6ad5-4b7a-9fec-7a4c8fea0147",
@@ -1782,7 +1832,8 @@
       "matematica": 10,
       "redacao": "6.35"
     },
-    "turma": "2022"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "f1caef7b-3aaf-457f-afd2-75ecd08506e4",
@@ -1817,7 +1868,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2021",
+    "ativa": true
   },
   {
     "id": "cf7a0167-847a-4080-99db-6a873739a879",
@@ -1852,7 +1904,8 @@
       "matematica": 10,
       "redacao": "2.41"
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "7102bcc6-6fc8-4ed2-9793-edf9eeb97b3a",
@@ -1887,7 +1940,8 @@
       "matematica": 10,
       "redacao": "5.17"
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": true
   },
   {
     "id": "9a155de8-7b35-42f3-be9d-35b4e7807363",
@@ -1922,7 +1976,8 @@
       "matematica": "8.05",
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": true
   },
   {
     "id": "6e234b78-f809-4939-984b-b0c2e7bd29c7",
@@ -1957,7 +2012,8 @@
       "matematica": "3.79",
       "redacao": 10
     },
-    "turma": "2022"
+    "turma": "2021",
+    "ativa": false
   },
   {
     "id": "7e959041-ba91-45e2-8caf-9991e7f1ecb0",
@@ -1992,7 +2048,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": true
   },
   {
     "id": "0c33e7f1-b5e1-4e44-a98f-170d02b37137",
@@ -2027,7 +2084,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "38ca8fba-7a82-4ffe-b66b-050f1e4bfb1b",
@@ -2062,7 +2120,8 @@
       "matematica": 10,
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   },
   {
     "id": "01fafa0c-b033-4ca8-af59-ea287e70ae3d",
@@ -2097,6 +2156,7 @@
       "matematica": "8.24",
       "redacao": 10
     },
-    "turma": "2021"
+    "turma": "2022",
+    "ativa": false
   }
 ]
