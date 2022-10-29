@@ -56,18 +56,18 @@ const obterTodasAsAlunas = async (req, res) => {
 }
 
 const obterAlunaPorId = async (req, res) => {
-   const { id } = req.params
+  const { id } = req.params
 
-   try {
-      const alunas = await db()
-      const alunaEncontrada = alunas.find(aluna => aluna.id  == id)
-      if (alunaEncontrada == undefined) {
-        return res.status(404).send({ message: "Aluna não encontrada"})
-      }
-      res.status(200).send(alunaEncontrada)
-   } catch (error) {
+  try {
+    const alunas = await db()
+    const alunaEncontrada = alunas.find(aluna => aluna.id == id)
+    if (alunaEncontrada == undefined) {
+      return res.status(404).send({ message: "Aluna não encontrada"})
+    }
+    res.status(200).send(alunaEncontrada)
+  } catch (error) {
     res.status(500).send({ message: error.message })
-   }
+  }
 }
 
 const obterNotas = async (req, res) => {
@@ -103,7 +103,51 @@ const obterNotas = async (req, res) => {
 }
 
 const obterBoletim = async (req, res) => {
-   // para casa
+  const { turma } = req.params
+
+  try {
+    const alunas = await db()
+
+    const alunasEncontradas = alunas.filter(alunaAtual => alunaAtual.turma == turma)
+
+    if (alunasEncontradas.length == 0) {
+      return res.status(404).json({ message: `Nenhuma aluna encontrada para a turma de ${turma}.` })
+    }
+
+    let notasAlunas;
+    let media;
+    let alunasFiltradas = [];
+
+    alunasEncontradas.forEach(aluna => {
+      notasAlunas = Object.values(aluna.notas)
+      media = (notasAlunas.reduce((acumulador, nota) => +acumulador + +nota)) / notasAlunas.length
+
+      if (media >= 6) {
+        situacao = "APROVADA"
+      } else if (media >= 5) {
+        situacao = "RECUPERAÇÃO"
+      } else {
+        situacao = "REPROVADA"
+      }
+
+      const resposta = {
+        ...aluna.notas,
+        situacao: situacao,
+        media: +media.toFixed(2),
+        nome: aluna.nome_social || aluna.nome_registro,
+        turma: aluna.turma
+      }
+
+      alunasFiltradas.push(resposta)
+      
+    });
+
+    res.status(200).send(alunasFiltradas)
+
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+
 }
 
 const criarAluna = async (req, res) => {
