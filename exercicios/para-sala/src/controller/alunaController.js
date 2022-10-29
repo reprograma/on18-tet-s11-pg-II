@@ -186,8 +186,7 @@ const deletarAluna = async (req, res) => {
      if (alunaIndice === -1) return res.status(404).send({
        message: "Aluna não encontrada."
      })
-    
-     alunas.splice(alunaIndice, 1)
+       alunas.splice(alunaIndice, 1)
 
      res.status(200).send({ message: "Aluna deletada com sucesso!"})
      
@@ -195,6 +194,8 @@ const deletarAluna = async (req, res) => {
       res.status(500).send({ message: error.message })
    }
 }
+
+
 
 module.exports = {
   deletarAluna,
