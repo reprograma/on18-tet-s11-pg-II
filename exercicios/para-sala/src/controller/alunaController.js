@@ -115,7 +115,7 @@ const obterBoletins = async (req, res) => {
     let alunasFiltradas = [];
     alunasEncontradas.forEach(aluna => {
       notasAlunas = Object.values(aluna.notas)
-      media = (notasAlunas.reduce((acumulador, nota) => Number(acumulador) + Number(nota))) / 5
+      media = (notasAlunas.reduce((acumulador, nota) => +acumulador + +nota)) / notasAlunas.length
       if (media >= 6) {
         situacao = "APROVADA"
       } else if (media >= 5) {
@@ -124,13 +124,9 @@ const obterBoletins = async (req, res) => {
         situacao = "REPROVADA"
       }
       const resposta = {
-        ciencias_da_natureza: aluna.notas.ciencias_da_natureza,
-        ciencias_humanas: aluna.notas.ciencias_humanas,
-        linguagens_codigos: aluna.notas.linguagens_codigos,
-        matematica: aluna.notas.matematica,
-        redacao: aluna.notas.redacao,
+        ...aluna.notas,
         situacao: situacao,
-        media: Number(media.toFixed(2)),
+        media: +media.toFixed(2),
         nome: aluna.nome_social || aluna.nome_registro,
         turma: aluna.turma
       }
