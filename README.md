@@ -1,6 +1,6 @@
-<h1 align="center">
+
   <img src="assets/reprograma-fundos-claros.png" alt="logo reprograma" width="500">
-</h1>
+
 
 # Tema da Aula
 
