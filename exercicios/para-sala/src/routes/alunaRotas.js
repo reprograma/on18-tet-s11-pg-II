@@ -10,4 +10,5 @@ rotas.post("/criar", controller.criarAluna)
 rotas.put("/:id/atualizar", controller.atualizarAluna)
 rotas.delete("/:id/deletar", controller.deletarAluna)
 
+
 module.exports = rotas
