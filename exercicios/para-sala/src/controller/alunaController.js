@@ -109,6 +109,7 @@ const obterBoletim = async (req, res) => {
         const alunas =  await db()
         
         const alunasFiltradas = alunas.filter(alunaAtual => alunaAtual.turma == turma)
+        
         let boletim = []
 
         for (const aluna of alunasFiltradas) {
@@ -121,22 +122,31 @@ const obterBoletim = async (req, res) => {
 
             const media = (Object.values(alunaNotas).reduce((acumulador, nota) => Number(acumulador) + Number(nota))) / 5
 
-            const infoAlunas = {
+            if(media >= 6){
+                situacao = "APROVADA"
+            } else if(media >= 5){
+                situacao = "RECUPERAÇÃO"
+            } else{
+                situacao = "REPROVADA"
+            }
+
+            const infosAluna = {
                 ciencias_da_natureza,
                 ciencias_humanas,
                 linguagens_codigos,
                 matematica,
-                redacao, 
+                redacao,
+                "situacao" : situacao, 
                 "media": media.toFixed(2),
                 "nome": aluna.nome_social || aluna.nome_registro,
                 "turma": aluna.turma
             }
             
-            boletim.push(infoAlunas)
-    }
-    res.status(200).send(boletim)
-    
-        } catch (error) {
+            boletim.push(infosAluna)
+        }
+        res.status(200).send(boletim)
+
+    }catch (error) {
         res.status(500).send({message: error.message})
     }
 }
