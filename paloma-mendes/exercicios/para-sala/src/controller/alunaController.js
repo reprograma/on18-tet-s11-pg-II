@@ -64,8 +64,6 @@ const obterTodasAsAlunas = async (request, response) => {
         })
     }
 }
-
-
 const obterAlunaPorId = async (request, response) => {
     try {
         const alunas = await db()
@@ -73,7 +71,7 @@ const obterAlunaPorId = async (request, response) => {
 
         let alunaEncontrada = alunas.find(alunaAtual => alunaAtual.id == idRequest)
 
-        if (alunaEncontrada === undefined) return response.status(500).send({
+        if (alunaEncontrada === undefined) return response.status(404).send({
             message: `Nenhuma aluna encontrada para o ID informado: ${idRequest}`
         })
 
@@ -119,54 +117,102 @@ const obterNotas = async (request, response) => {
 }
 
 const obterBoletim = async (request, response) => {
+    //Melhor solução, feito em aula
+    const turmaRequest = request.params.turma
 
     try {
         const alunas = await db()
-        const { turma } = request.params
+        const alunasFiltradas = alunas.filter(alunaAtual => alunaAtual.turma == turmaRequest)
 
-        // let alunasEncontradas = alunas.slice()
+        if (alunasFiltradas.length == 0) {
+            return response.status(404).send({
+                message: "Essa turma não existe: " + turmaRequest,
+            })
+        }
 
-        const alunasEncontradas = alunas.filter(turmaAtual => turmaAtual.turma == turma)
+        //mapeando os dados
+        const alunasBoletim = alunasFiltradas.map((aluna) => {
+            const notas = Object
+                .values(aluna.notas) //pegar todas a notas
+                .map(nota => Number(nota)) //convertendo as notas para numeros
 
-        if (alunasEncontradas == 0) return response.status(400).send({ message: "Nenhuma aluna encontrada para a turma informada" })
+            //soma das notas utilizando o reduce
+            //reduce array.reduce((acumulador, valorAtual) => acumulador + valorAtual, ValorEmQue inicia)
+            const total = notas.reduce((total, nota) => total + nota, 0)
+            const media = total / notas.length
 
-        let alunasPorTurma = [];
+            let situacao = "NÃO COMPUTADA"
 
-        alunasEncontradas.forEach(alunaAtual => {
-            let situacao = 0
-            notas = Object.values(alunaAtual.notas)
+            if (media > 6) situacao = "APROVADA"
+            else if (media < 5) situacao = "REPROVADA"
+            else if (media >= 5 && media <= 6) situacao = "RECUPERAÇÃO"
 
-            media = (notas.reduce((acumulador, nota) => Number(acumulador) + Number(nota))) / 5
-
-            if (media >= 6) {
-                situacao = "APROVADA"
-            } if (media > 5 && media < 6) {
-                situacao = "RECUPERAÇÂO"
-            } else {
-                situacao = "REPROVADO"
+            const boletim = {
+                nome: aluna.nome_social || aluna.nome_registro,
+                turma: aluna.turma,
+                ...aluna.notas, // é o equivalente a extrair nota por nota
+                media,
+                situacao,
             }
 
-            const resposta = {
-                ciencias_da_natureza: alunaAtual.notas.ciencias_da_natureza,
-                ciencias_humanas: alunaAtual.notas.ciencias_humanas,
-                linguagens_codigos: alunaAtual.notas.linguagens_codigos,
-                matematica: alunaAtual.notas.matematica,
-                redacao: alunaAtual.notas.redacao,
-                turma: alunaAtual.turma,
-                nome: alunaAtual.nome_social || alunaAtual.nome_registro,
-                media: situacao
-            }
-
-            alunasPorTurma.push(resposta)
+            return boletim
         })
-        response.status(200).send(alunasPorTurma)
 
+        response.status(200).send(alunasBoletim)
     } catch (error) {
         response.status(500).send({
             message: error.message
         })
     }
 }
+
+  //Solução que fiz inicialmente  // try {
+    //     const alunas = await db()
+    //     const { turma } = request.params
+
+    //     // let alunasEncontradas = alunas.slice()
+
+    //     const alunasEncontradas = alunas.filter(turmaAtual => turmaAtual.turma == turma)
+
+    //     if (alunasEncontradas == 0) return response.status(400).send({ message: "Nenhuma aluna encontrada para a turma informada" })
+
+    //     let alunasPorTurma = [];
+
+    //     alunasEncontradas.forEach(alunaAtual => {
+    //         let situacao = 0
+    //         notas = Object.values(alunaAtual.notas)
+
+    //         media = (notas.reduce((acumulador, nota) => Number(acumulador) + Number(nota))) / 5
+
+    //         if (media >= 6) {
+    //             situacao = "APROVADA"
+    //         } if (media > 5 && media < 6) {
+    //             situacao = "RECUPERAÇÂO"
+    //         } else {
+    //             situacao = "REPROVADO"
+    //         }
+
+    //         const resposta = {
+    //             ciencias_da_natureza: alunaAtual.notas.ciencias_da_natureza,
+    //             ciencias_humanas: alunaAtual.notas.ciencias_humanas,
+    //             linguagens_codigos: alunaAtual.notas.linguagens_codigos,
+    //             matematica: alunaAtual.notas.matematica,
+    //             redacao: alunaAtual.notas.redacao,
+    //             turma: alunaAtual.turma,
+    //             nome: alunaAtual.nome_social || alunaAtual.nome_registro,
+    //             media: situacao
+    //         }
+
+    //         alunasPorTurma.push(resposta)
+    //     })
+    //     response.status(200).send(alunasPorTurma)
+
+    // } catch (error) {
+    //     response.status(500).send({
+    //         message: error.message
+    //     })
+    // }
+// }
 
 const criarAluna = async (request, response) => {
     try {
@@ -198,20 +244,33 @@ const criarAluna = async (request, response) => {
 }
 
 const atualizarAluna = async (request, response) => {
-    alunas = await db()
-    const { idRequest } = request.params
-    const alunaBody = request.body
-
-    const alunaEncontrada = alunas.find(alunaAtual => alunaAtual.id == idRequest)
-
-    const chaves = Object.keys(alunaEncontrada)
-
-    chaves.forEach(chave => {
-
-
-    })
+    const idRequest = request.params.id
+    const { cpf, id: idDeletado, // extraimos(removemos) o cpf e o id do body
+        ...alunaBody } = request.body
+    // outra forma de deletar: delete: alunaBody.cpf; delete alunaBody.id
 
     try {
+        const alunas = await db()
+        const alunaEncontrada = alunas.find(alunaAtual => alunaAtual.id == idRequest)
+
+        if (alunaEncontrada == undefined) return response.status(404).send({
+            message: "Aluna não encontrada"
+        })
+
+        const chaves = Object.keys(alunaEncontrada)
+
+        if (cpf) {
+            throw new Error("O CPF não pode ser atualizado")
+        }
+
+        chaves.forEach(chave => {
+            let dadoAtualizado = alunaBody[chave] //acessando a propriedade que vem do body(request) e atribuindo a let 
+            if (dadoAtualizado) alunaEncontrada[chave] = dadoAtualizado
+            // let existeDado = new Boolean(dadoAtualizado) //valida se recebemos o dado na request
+            // if (existeDado === true) alunaEncontrada[chave] = dadoAtualizado //atualiza o dado recebido de acordo com a sua respectiva chave
+        })
+
+        response.status(200).send(alunaEncontrada)
 
     } catch (error) {
         response.status(500).send({
@@ -221,10 +280,25 @@ const atualizarAluna = async (request, response) => {
 }
 
 const deletarAluna = async (request, response) => {
+    // const idRequest = request.params.id
+    const { id } = request.params
+
     try {
-        
+        const alunas = await db()
+        const alunaIndice = alunas.findIndex(alunaAtual => alunaAtual.id == id)
+
+        if (alunaIndice == -1) return response.status(404).send({
+            message: "Aluna não encontrada"
+        })
+
+        alunas.splice(alunaIndice, 1)
+
+        response.status(200).send({
+            message: "Aluna deletada com sucesso!"
+        })
+
     } catch (error) {
-        
+        response.status(500).send({ message: error.message })
     }
 }
 
