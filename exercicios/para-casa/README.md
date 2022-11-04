@@ -8,12 +8,16 @@ Para finarlizamos o nosso projeto guiado, ficou faltando um endpoint que retorne
 
 #### Regras de negocio
 
-Será necessario filtrar as alunas pela turma que foi recebida via parametros
-Será necessário obter a média de todas as disciplinas e a partir dessa média definir a situacao da aluna
+1. Será necessario filtrar as alunas pela turma que foi recebida via parametros
+2. Será necessário obter a média de todas as disciplinas e a 
+3. partir dessa média definir a situacao da aluna
 
+regras:
 nota maior que 6 - "APROVADA"
 nota maior que 5 e menor que 6 - "RECUPERACAO"
 nota menor que 5 - "REPROVADA"
+
+construir a resposta para corresponder ao exemplo abaixo
 
 Detalhes do endpoint:
 GET /alunas/
