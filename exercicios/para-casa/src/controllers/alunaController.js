@@ -201,10 +201,9 @@ const atualizarAluna = async (req, res) => {
     res.status(200).send(alunaEncontrada)
     } catch (error) {
     res.status(500).send({
-    message: error.message
+    message: error.message 
     })
     }
-
 
 }
 
@@ -231,7 +230,7 @@ const deletarAluna = async (req, res) => {
 
 module.exports = {
     obterTodasAsAlunas,
-    obterAlunaPorId,
+    obterAlunaPorId ,
     obterNotas,
     obterBoletim,
     criarAluna,
